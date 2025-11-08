@@ -12,6 +12,13 @@
 
 set -e # 如果命令失败，立即退出.
 
+# --- 加载 .env 文件 ---
+if [ -f .env ]; then
+  echo "检测到 .env 文件，正在加载环境变量..."
+  export $(grep -v '^#' .env | xargs)
+fi
+
+
 # --- 环境检查 ---
 # 确保 git 和 gh 已安装.
 if ! command -v git &> /dev/null; then
